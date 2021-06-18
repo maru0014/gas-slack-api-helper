@@ -1,4 +1,4 @@
-class SlackAPI {
+class SlackClient {
   constructor(token) {
     this.TOKEN = token;
     this.BASE_URI = "https://slack.com";
@@ -127,3 +127,12 @@ class SlackAPI {
     return this.request("post", api_method, payload);
   }
 } // end class SlackAPI
+
+/**
+ * SlackClientクラスにトークンを渡して初期化
+ * @param {string} token Slackアプリトークン
+ * @return {SlackClient}
+ */
+function init(token) {
+  return new SlackClient(token);
+}
