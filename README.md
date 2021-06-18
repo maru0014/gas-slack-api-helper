@@ -14,8 +14,7 @@ GAS を外部から管理するためには Google Apps Script API を「オン�
 https://script.google.com/home/usersettings
 
 ```sh
-npm init -y
-npm install -D @google/clasp
-npm install -S @types/google-apps-script
-clasp clone "1nw2y6FDoHCffvhXaa1Go7mTKpdQewyDtFv_P-mo9_Abaf5lvllaReEBj"
+git clone https://github.com/maru0014/gas-slack-api-helper.git
+cd gas-slack-api-helper
+npm install
 ```
