@@ -133,6 +133,7 @@ class SlackClient {
    * @param {Array} fields 取得対象フィールドを限定する場合は配列でkeyを指定
    */
   initUsersSheet(sheetName = "users", fields) {
+    const spreadSheet = SpreadsheetApp.getActiveSpreadsheet();
     const sheet =
       spreadSheet.getSheetByName(sheetName) ||
       spreadSheet.insertSheet(sheetName);
@@ -156,6 +157,7 @@ class SlackClient {
    * @param {Array} fields 取得対象フィールドを限定する場合は配列でkeyを指定
    */
   initChannelsSheet(sheetName = "channels", fields) {
+    const spreadSheet = SpreadsheetApp.getActiveSpreadsheet();
     const sheet =
       spreadSheet.getSheetByName(sheetName) ||
       spreadSheet.insertSheet(sheetName);
