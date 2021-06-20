@@ -126,6 +126,52 @@ class SlackClient {
     };
     return this.request("post", api_method, payload);
   }
+
+  /**
+   * スプレッドシートに管理用シートを生成
+   * @param {Sheet} sheet 初期化対象シート
+   * @param {Array} fields 取得対象フィールドを限定する場合は配列でkeyを指定
+   */
+  initUsersSheet(sheetName = "users", fields) {
+    const sheet =
+      spreadSheet.getSheetByName(sheetName) ||
+      spreadSheet.insertSheet(sheetName);
+    sheet.clearContents();
+
+    const json = slack.getUsers();
+
+    const flatJson = json.map((e) => flattenObj(e));
+    const headers = fields || Object.keys(flatJson[0]);
+    const body = flatJson.map((row) => {
+      return headers.map((key) => row[key] || "");
+    });
+
+    const table = [headers].concat(body);
+    sheet.getRange(1, 1, table.length, table[0].length).setValues(table);
+  }
+
+  /**
+   * スプレッドシートに管理用シートを生成
+   * @param {Sheet} sheet 初期化対象シート
+   * @param {Array} fields 取得対象フィールドを限定する場合は配列でkeyを指定
+   */
+  initChannelsSheet(sheetName = "channels", fields) {
+    const sheet =
+      spreadSheet.getSheetByName(sheetName) ||
+      spreadSheet.insertSheet(sheetName);
+    sheet.clearContents();
+
+    const json = slack.getChannels();
+
+    const flatJson = json.map((e) => flattenObj(e));
+    const headers = fields || Object.keys(flatJson[0]);
+    const body = flatJson.map((row) => {
+      return headers.map((key) => row[key] || "");
+    });
+
+    const table = [headers].concat(body);
+    sheet.getRange(1, 1, table.length, table[0].length).setValues(table);
+  }
 } // end class SlackAPI
 
 /**
@@ -184,7 +230,7 @@ const flattenObj = (obj) => {
     } else {
       result[key] = value;
     }
-}
+  }
 
   return result;
 };
